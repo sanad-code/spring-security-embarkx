@@ -58,3 +58,6 @@
 - 401 is fail authentication 403 is fail authorization.
 
 ## Enabling H2 Database Line By Line | Spring Security Full Course Series | Video #7
+
+- we need to add h2, jpa dependencies to pom
+- we need to add h2 and datasource to property file
