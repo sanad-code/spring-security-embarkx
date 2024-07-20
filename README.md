@@ -21,3 +21,17 @@ Getting Started with Spring Security and Form Based Authentication | Spring Secu
 - Configuring a spring project with spring security.
 - How autoconfiguration magic works in spring boot.
 - Check the form based authentication mechanism.
+
+## Steps
+
+- create controller, it is working.
+- add authentication dependency to pom.
+- try to access the controller again it will ask for username and password.
+- /login is the default login page.
+- /logout is the default logout page. http://localhost:8080/logout
+- By default, every thing is secured and requires authentication.
+- The default is form based authentication.
+- There are default login and logout form.
+- Default username and password is created from you.
+- You can open the dev tools to see the login and logout request details.
+- You can add property to fix the username and password, this style is good for dev environment only.

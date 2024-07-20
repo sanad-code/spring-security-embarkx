@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-security-embarkx
+  security:
+    user:
+      password: 123
+      name: msanad
