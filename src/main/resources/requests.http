@@ -1,3 +1,18 @@
 ###
 GET http://localhost:8080/hello
 Authorization: Basic bXNhbmFkOjEyMw==
+
+###
+
+GET http://localhost:8080/hello
+Authorization: Basic bXR6OjEyMw==
+
+###
+
+GET http://localhost:8080/admin
+Authorization: Basic bXR6OjEyMw==
+
+###
+
+GET http://localhost:8080/admin
+Authorization: Basic bXNhbmFkOjEyMw==

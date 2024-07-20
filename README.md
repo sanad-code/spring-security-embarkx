@@ -16,13 +16,13 @@
 - The security context is aware of authenticated user during the session.
 - So the details of authenticated user remains in the security context.
 
-# Getting Started with Spring Security and Form Based Authentication | Spring Security | Video #3
+## Getting Started with Spring Security and Form Based Authentication | Spring Security | Video #3
 
 - Configuring a spring project with spring security.
 - How autoconfiguration magic works in spring boot.
 - Check the form based authentication mechanism.
 
-## Steps
+### Steps
 
 - create controller, it is working.
 - add authentication dependency to pom.
@@ -37,7 +37,7 @@
 - You can 
 - add property to fix the username and password, this style is good for dev environment only.
 
-# Basic Authentication and writing our own Security Filter | Spring Security Series | Video 4
+## Basic Authentication and writing our own Security Filter | Spring Security Series | Video 4
 
 - Form based authentication is not good for apis.
 - There is basic authentication can be used in this case.
@@ -46,7 +46,15 @@
 - There is a session that is managed based on cookies.
 - You can stop this session management by configuring the session policy.
 
-# In Memory Authentication Line By Line | Spring Security Series | Video #5
+## In Memory Authentication Line By Line | Spring Security Series | Video #5
 
 - In memory authentication is not good for production.
 - We need to add bean of UserDetailsService that returns InMemoryUserDetailsManager.
+
+## Role Based Authorization Line By Line | Spring Security Full Course Series | Video #6
+
+- we need @EnableMethodSecurity to enable method level security.
+- @PreAuthorize("hasRole('ROLE_ADMIN')") is used to secure the method.
+- 401 is fail authentication 403 is fail authorization.
+
+## Enabling H2 Database Line By Line | Spring Security Full Course Series | Video #7
