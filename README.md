@@ -61,3 +61,12 @@
 
 - we need to add h2, jpa dependencies to pom
 - we need to add h2 and datasource to property file
+
+## Database Authentication In Spring Boot Line By Line | Spring Security Full Course Tutorial | #8
+
+- spring-security is opensource in github, you can search for users.ddl
+- for jdbc we need to create users schema and table.
+- During saving role to databse the name is appended with ROLE_XXXX, and we do the check with name only without ROLE_.
+- Hashing is done by password encoder.
+- bcrypt involves using salting it is a secure algorithm for hashing and one of the most popular ones.
+- Salting increase the security.

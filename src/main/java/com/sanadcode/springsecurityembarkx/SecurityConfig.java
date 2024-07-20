@@ -10,8 +10,13 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -28,16 +33,34 @@ public class SecurityConfig {
         //http.formLogin(withDefaults());
         //http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.httpBasic(withDefaults());
-        http.csrf(AbstractHttpConfigurer::disable);
+        http.csrf( csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
         return http.build();
     }
 
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails admin = User.withUsername("msanad").password("{noop}123").roles("ADMIN", "USER").build();
+//        UserDetails user = User.withUsername("mtz").password("{noop}123").roles("USER").build();
+//        return new InMemoryUserDetailsManager(admin,user);
+//    }
+
+
     @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails admin = User.withUsername("msanad").password("{noop}123").roles("ADMIN", "USER").build();
-        UserDetails user = User.withUsername("mtz").password("{noop}123").roles("USER").build();
-        return new InMemoryUserDetailsManager(admin,user);
+    UserDetailsService userDetailsService(DataSource dataSource){
+//        UserDetails admin = User.withUsername("msanad").password("{noop}123").roles("ADMIN", "USER").build();
+//        UserDetails user = User.withUsername("mtz").password("{noop}123").roles("USER").build();
+        UserDetails admin = User.withUsername("msanad").password(passwordEncoder().encode("123")).roles("ADMIN", "USER").build();
+        UserDetails user = User.withUsername("mtz").password(passwordEncoder().encode("123")).roles("USER").build();
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        jdbcUserDetailsManager.createUser(admin);
+        jdbcUserDetailsManager.createUser(user);
+        return jdbcUserDetailsManager;
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
 }
