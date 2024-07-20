@@ -15,3 +15,9 @@
 - Finally, security context is created and the user is authenticated.
 - The security context is aware of authenticated user during the session.
 - So the details of authenticated user remains in the security context.
+
+Getting Started with Spring Security and Form Based Authentication | Spring Security | Video #3
+
+- Configuring a spring project with spring security.
+- How autoconfiguration magic works in spring boot.
+- Check the form based authentication mechanism.
