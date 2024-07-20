@@ -45,3 +45,8 @@
 - We can create our custome security filter chain.
 - There is a session that is managed based on cookies.
 - You can stop this session management by configuring the session policy.
+
+# In Memory Authentication Line By Line | Spring Security Series | Video #5
+
+- In memory authentication is not good for production.
+- We need to add bean of UserDetailsService that returns InMemoryUserDetailsManager.
