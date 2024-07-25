@@ -1,8 +1,10 @@
 package com.sanadcode.springsecurityembarkx;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 
@@ -54,31 +57,44 @@ public class SecurityConfig {
 //        auth.userDetailsService(inMemoryService);
 //    }
 
-//    @Bean
-//    @Qualifier("inMemory")
-//    public UserDetailsService userDetailsService() {
-//        UserDetails admin = User.withUsername("msanad").password("{noop}123").roles("ADMIN", "USER").build();
-//        UserDetails user = User.withUsername("mtz").password("{noop}123").roles("USER").build();
-//        return new InMemoryUserDetailsManager(admin,user);
-//    }
-
-
     @Bean
-    @Qualifier("jdbc")
-    UserDetailsService userDetailsService(DataSource dataSource){
-//        UserDetails admin = User.withUsername("msanad").password("{noop}123").roles("ADMIN", "USER").build();
-//        UserDetails user = User.withUsername("mtz").password("{noop}123").roles("USER").build();
-        UserDetails admin = User.withUsername("msanad").password(passwordEncoder().encode("123")).roles("ADMIN", "USER").build();
-        UserDetails user = User.withUsername("mtz").password(passwordEncoder().encode("123")).roles("USER").build();
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.createUser(admin);
-        jdbcUserDetailsManager.createUser(user);
-        return jdbcUserDetailsManager;
+    @Qualifier("inMemory")
+    public UserDetailsService userDetailsService() {
+        UserDetails admin = User.withUsername("msanad").password("{noop}123").roles("ADMIN", "USER").build();
+        UserDetails user = User.withUsername("mtz").password("{noop}123").roles("USER").build();
+        UserDetails userDetails = User.withUsername("user")
+                .password("password")
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(admin,user);
     }
+
+
+//    @Bean
+//    @Qualifier("jdbc")
+//    UserDetailsService userDetailsService(DataSource dataSource){
+////        UserDetails admin = User.withUsername("msanad").password("{noop}123").roles("ADMIN", "USER").build();
+////        UserDetails user = User.withUsername("mtz").password("{noop}123").roles("USER").build();
+//        UserDetails admin = User.withUsername("msanad").password(passwordEncoder().encode("123")).roles("ADMIN", "USER").build();
+//        UserDetails user = User.withUsername("mtz").password(passwordEncoder().encode("123")).roles("USER").build();
+//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        jdbcUserDetailsManager.createUser(admin);
+//        jdbcUserDetailsManager.createUser(user);
+//        return jdbcUserDetailsManager;
+//    }
 
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+    /**
+     *  This is to erase the password from the authentication object after authentication
+     *  This is bad practice, don't do it, by default it is set to true.
+     */
+//    @Autowired
+//    void configure(AuthenticationManagerBuilder authenticationManagerBuilder){
+//        authenticationManagerBuilder.eraseCredentials(false);
+//    }
 
 }
