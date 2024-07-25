@@ -40,7 +40,7 @@ Content-Type: application/json
 POST http://localhost:8080/csrf/create
 Authorization: Basic bXNhbmFkOjEyMw==
 Content-Type: application/json
-X-Csrf-Token: zJW4q65Km8poqDk4gvadDtAaUntQf3krXH5gAhAXpqGxH5xPraWOyMgurKhFmVsL49upNrV_f0NnTUgGa0gGNicvk5GBKqx5
+X-Csrf-Token: 1e418486-5611-4ba7-860c-40fa43ba7c2c
 
 {
   "id": 3,

@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 
 import javax.sql.DataSource;
 
@@ -38,6 +40,10 @@ public class SecurityConfig {
         http.httpBasic(withDefaults());
         http.csrf( csrf -> {
             csrf.ignoringRequestMatchers("/h2-console/**");
+            // The below 2 lines activate X-XSRF-Token from cookies, you can read the value and send it with request from cookie
+            // Without the need to fech token
+            //csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+            //csrf.csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler());
         });
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
         return http.build();
