@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF Form</title>
+</head>
+<body>
+<h1>Submit User Data</h1>
+<form id="csrfForm">
+    <label for="id">ID:</label>
+    <input type="number" id="id" name="id" required><br><br>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <input type="hidden" id="csrfToken" name="_csrf">
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    // Fetch the CSRF token and set it in the hidden input field
+    fetch('/csrf/token')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('csrfToken').value = data.token;
+        });
+
+    // Handle form submission
+    document.getElementById('csrfForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = {
+            id: document.getElementById('id').value,
+            name: document.getElementById('name').value
+        };
+
+        fetch('/csrf/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.getElementById('csrfToken').value
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+</html>

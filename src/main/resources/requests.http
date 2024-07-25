@@ -16,3 +16,34 @@ Authorization: Basic bXR6OjEyMw==
 
 GET http://localhost:8080/admin
 Authorization: Basic bXNhbmFkOjEyMw==
+
+
+### CSRF Test Token
+GET http://localhost:8080/csrf/token
+Authorization: Basic bXNhbmFkOjEyMw==
+
+### CSRF Test Attribute
+GET http://localhost:8080/csrf/token1
+Authorization: Basic bXNhbmFkOjEyMw==
+
+### CSRF Test Create without token Should give 401 authorization error
+POST http://localhost:8080/csrf/create
+Authorization: Basic bXNhbmFkOjEyMw==
+Content-Type: application/json
+
+{
+    "id": 1,
+    "name": "test"
+}
+
+### CSRF Test Create without token, first run the token request and then use the token in the header
+POST http://localhost:8080/csrf/create
+Authorization: Basic bXNhbmFkOjEyMw==
+Content-Type: application/json
+X-Csrf-Token: zJW4q65Km8poqDk4gvadDtAaUntQf3krXH5gAhAXpqGxH5xPraWOyMgurKhFmVsL49upNrV_f0NnTUgGa0gGNicvk5GBKqx5
+
+{
+  "id": 3,
+  "name": "test"
+}
+

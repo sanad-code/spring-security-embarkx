@@ -1,7 +1,9 @@
 package com.sanadcode.springsecurityembarkx;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,20 +27,29 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) ->
                 requests.requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated());
-        //http.formLogin(withDefaults());
+        http.formLogin(withDefaults());
         //http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.httpBasic(withDefaults());
-        http.csrf( csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));
+        http.csrf( csrf -> {
+            csrf.ignoringRequestMatchers("/h2-console/**");
+        });
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
         return http.build();
     }
 
+//    public void multiAuth(AuthenticationManagerBuilder auth, @Qualifier("jdbc") UserDetailsService jdbcService, @Qualifier("inMemory") UserDetailsService inMemoryService) throws Exception {
+//        auth.userDetailsService(jdbcService).passwordEncoder(passwordEncoder());
+//        auth.userDetailsService(inMemoryService);
+//    }
+
 //    @Bean
+//    @Qualifier("inMemory")
 //    public UserDetailsService userDetailsService() {
 //        UserDetails admin = User.withUsername("msanad").password("{noop}123").roles("ADMIN", "USER").build();
 //        UserDetails user = User.withUsername("mtz").password("{noop}123").roles("USER").build();
@@ -47,6 +58,7 @@ public class SecurityConfig {
 
 
     @Bean
+    @Qualifier("jdbc")
     UserDetailsService userDetailsService(DataSource dataSource){
 //        UserDetails admin = User.withUsername("msanad").password("{noop}123").roles("ADMIN", "USER").build();
 //        UserDetails user = User.withUsername("mtz").password("{noop}123").roles("USER").build();
