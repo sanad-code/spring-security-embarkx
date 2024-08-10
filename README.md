@@ -80,3 +80,8 @@
 - Send username and password in the request header as authorization header.
 - Credentials are encoded in base64.
 - Format is Basic username:password in base64.
+- File SpringBootWebSecurityConfiguration is responsible for the default security configuration.
+  - The method defaultSecurityFilterChain is responsible for the default security configuration
+    it returns SecurityFilterChain object.
+  - It simply mark all requestes as authenticated and enable both form and basic authentication.
+  - If we specify our class SecurityFilterChain this default class will be ignored.
