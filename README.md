@@ -85,3 +85,5 @@
     it returns SecurityFilterChain object.
   - It simply mark all requestes as authenticated and enable both form and basic authentication.
   - If we specify our class SecurityFilterChain this default class will be ignored.
+- Creating our security config file we need annotation @EnableWebSecurity and @Configuration.
+- Then we create @Bean of type SecurityFilterChain that takes HttpSecurity object, this object build is the return of method.
