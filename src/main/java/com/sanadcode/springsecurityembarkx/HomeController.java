@@ -9,4 +9,23 @@ public class HomeController {
     public String home() {
         return "Welcome to the home page!";
     }
+    @RequestMapping("/contact")
+    public String contact() {
+        return "Contact us at";
+    }
+
+    @RequestMapping("/public")
+    public String publicPage() {
+        return "This is a public page";
+    }
+
+    @RequestMapping("/public/hi")
+    public String publicPage1() {
+        return "This is a public page 1";
+    }
+
+    @RequestMapping("/admin")
+    public String admin() {
+        return "This is an admin page";
+    }
 }

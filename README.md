@@ -87,3 +87,9 @@
   - If we specify our class SecurityFilterChain this default class will be ignored.
 - Creating our security config file we need annotation @EnableWebSecurity and @Configuration.
 - Then we create @Bean of type SecurityFilterChain that takes HttpSecurity object, this object build is the return of method.
+
+- Basic authentication vs form authentication
+- with only basic authentication configured /login will give error.
+- we need to enable form login with defaults
+- we can sesssion from statfull to stateless.
+- We can premit certain requestes and deny others.
