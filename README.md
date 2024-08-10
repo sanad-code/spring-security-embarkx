@@ -1,6 +1,6 @@
 # How Security works in Spring Boot | Spring Security Series | Video #2
 
-![1.png](src%2Fmain%2Fresources%2Fsc%2F1.png)
+![1.png](src/main/resources/sc/1.png)
 
 - Authentication filter intercept the authentication request and validate the user credentials, by creating authentication object.
 - The authentication object wraps the username and password.
@@ -70,3 +70,13 @@
 - Hashing is done by password encoder.
 - bcrypt involves using salting it is a secure algorithm for hashing and one of the most popular ones.
 - Salting increase the security.
+
+
+## Udemy Course
+
+### Section 3 Basic Authentication
+
+- It is simplest form of authentication
+- Send username and password in the request header as authorization header.
+- Credentials are encoded in base64.
+- Format is Basic username:password in base64.
