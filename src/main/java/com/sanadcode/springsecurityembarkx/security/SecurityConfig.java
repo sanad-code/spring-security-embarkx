@@ -23,6 +23,8 @@ public class SecurityConfig {
                 .anyRequest().authenticated() );
         // This alone will not show form login and will get popup for basic auth
         http.httpBasic(withDefaults());
+        // This will disable the csrf token
+        http.csrf(csrf -> csrf.disable());
         // Data is sent in payload as form data with username, password and _csrf
         // You can check request and response cookie in browser dev tools cookie tab after network tab
 //        http.formLogin(withDefaults());

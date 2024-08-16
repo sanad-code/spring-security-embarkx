@@ -6,9 +6,9 @@ spring:
       password: 123
       name: msanad
   datasource:
-    url: jdbc:mysql://mysql:3307/notes
+    url: jdbc:mysql://localhost:3308/notes
     username: root
-    password: rootpassword
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -17,6 +17,7 @@ spring:
     properties:
       hibernate.dialect: org.hibernate.dialect.MySQLDialect
 
+logging.level.org.springframework.security: TRACE
 #  h2:
 #    console:
 #      enabled: true
