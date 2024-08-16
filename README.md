@@ -102,3 +102,4 @@
 - @AuthenticationPrincipal UserDetails userDetails | userDetails.getUsername() to get username.
 
   - Note in mysql compose make port 3307 and in dbeaver make it 3306, it will work.
+  - `CREATE SCHEMA notes CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
