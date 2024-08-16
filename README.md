@@ -101,5 +101,6 @@
 - Adding note controller. 
 - @AuthenticationPrincipal UserDetails userDetails | userDetails.getUsername() to get username.
 
-  - Note in mysql compose make port 3307 and in dbeaver make it 3306, it will work.
-  - `CREATE SCHEMA notes CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
+- Note how in compose the port has 127.0.0.1 to make it easy to access the database from local workbench.
+- `CREATE SCHEMA notes CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
+- For logging `logging.level.org.springframework.security: TRACE`
