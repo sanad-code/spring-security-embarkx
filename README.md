@@ -100,3 +100,5 @@
 - Adding repos and services.
 - Adding note controller. 
 - @AuthenticationPrincipal UserDetails userDetails | userDetails.getUsername() to get username.
+
+  - Note in mysql compose make port 3307 and in dbeaver make it 3306, it will work.
