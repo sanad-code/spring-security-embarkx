@@ -93,3 +93,7 @@
 - we need to enable form login with defaults
 - we can sesssion from statfull to stateless.
 - We can premit certain requestes and deny others.
+
+### Section 4 Secure Notes Project
+
+- We created Note entity and added lombok and JPA dependencies.
