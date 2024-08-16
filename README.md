@@ -97,3 +97,4 @@
 ### Section 4 Secure Notes Project
 
 - We created Note entity and added lombok and JPA dependencies.
+- Adding repos and services.
