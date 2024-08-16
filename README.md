@@ -98,3 +98,5 @@
 
 - We created Note entity and added lombok and JPA dependencies.
 - Adding repos and services.
+- Adding note controller. 
+- @AuthenticationPrincipal UserDetails userDetails | userDetails.getUsername() to get username.
