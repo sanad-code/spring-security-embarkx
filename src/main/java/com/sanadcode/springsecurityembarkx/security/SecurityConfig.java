@@ -5,7 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -30,5 +36,23 @@ public class SecurityConfig {
 //        http.formLogin(withDefaults());
 //        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
+    }
+
+    @Bean
+    UserDetailsService userDetailsService(){
+        InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
+        UserDetails mai = User.withUsername("Mai").password("{noop}mai").roles("mai").build();
+        UserDetails malak = User.withUsername("Malak").password("{noop}malak").roles("malak").build();
+        UserDetails yasso = User.withUsername("Yasso").password("{noop}yasso").roles("yasso").build();
+        inMemoryUserDetailsManager.createUser(mai);
+        inMemoryUserDetailsManager.createUser(malak);
+        inMemoryUserDetailsManager.createUser(yasso);
+        return inMemoryUserDetailsManager;
+        /**
+         * we could also create list of UserDetails and pass it to inMemoryManager directly
+         */
+//     List<UserDetails> users = List.of(mai,malak,yasso);
+//     return new InMemoryUserDetailsManager(users);
+//     return new InMemoryUserDetailsManager(malak,mai,yasso);
     }
 }

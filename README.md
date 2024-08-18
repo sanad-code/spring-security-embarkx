@@ -117,3 +117,28 @@
   - Separation of concerns, we decouple the authentication logic from the rest of the application.
   - Extensibility, we can create our own authentication provider or integrating with 3rd party providers.
   - Security of credentials, we can use different hashing algorithms and salting techniques.
+
+#### Authentication Provider
+
+- DaoAuthenticationProvider is the most commonly used authentication provider and the default one if none is specified.
+- It uses UserDetailsService to retrieve the user details.
+- InMemoryUserDetailsManager is the simplest implementation of UserDetailsService.
+- LdapAuthenticationProvider is used to authenticate against an LDAP server, it needs configuration.
+- ActiveDirectoryLdapAuthenticationProvider is used to authenticate against an Active Directory server.
+- PreAuthenticatedAuthenticationProvider is used to authenticate requests that have already been authenticated by a different system.
+- OAuth2AuthenticationProvider is used to authenticate requests that have already been authenticated by an OAuth2 server.
+
+- Authentication provider has two methods authenticate and supports.
+- supports method is used to check if the authentication provider can authenticate the given authentication object.
+- supports allow authentication manager to select the correct authentication provider.
+
+#### InMemory Authentication
+
+![InMemory](src/main/resources/sc/2.png)
+
+- It is not recommended for production. store and manage the user details in memory.
+- It is useful for testing and development, small applications, and prototypes.
+- Benefits, simplicity, speed and ease of use.
+- In application.properties we can add only one user and password.
+- InMemoryUserDetailsManager is the implementation of UserDetailsService and allow us to add multiple users.
+
