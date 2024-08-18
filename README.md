@@ -104,3 +104,16 @@
 - Note how in compose the port has 127.0.0.1 to make it easy to access the database from local workbench.
 - `CREATE SCHEMA notes CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
 - For logging `logging.level.org.springframework.security: TRACE`
+
+### Section 5 Authentication Providers - In Memory Authentication
+
+- Authentication provider handles the actual verification of credentials.
+- Authentication provider is an interface. Multiple implementations can be configured.
+- Key responsibilities
+  - Authenticate the user, depend on your configuration.
+  - Create Authentication Token, generate authentication object to encapsulate the user credentials and roles.
+- Importance
+  - Flexibility, you can use multiple authentication providers (Ldap, Oauth, InMemory, etc.).
+  - Separation of concerns, we decouple the authentication logic from the rest of the application.
+  - Extensibility, we can create our own authentication provider or integrating with 3rd party providers.
+  - Security of credentials, we can use different hashing algorithms and salting techniques.
