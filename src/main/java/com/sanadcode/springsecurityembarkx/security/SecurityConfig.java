@@ -9,8 +9,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -38,6 +40,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
     @Bean
     UserDetailsService userDetailsService(){
         InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
@@ -48,11 +51,30 @@ public class SecurityConfig {
         inMemoryUserDetailsManager.createUser(malak);
         inMemoryUserDetailsManager.createUser(yasso);
         return inMemoryUserDetailsManager;
-        /**
-         * we could also create list of UserDetails and pass it to inMemoryManager directly
-         */
-//     List<UserDetails> users = List.of(mai,malak,yasso);
-//     return new InMemoryUserDetailsManager(users);
-//     return new InMemoryUserDetailsManager(malak,mai,yasso);
+         // we could also create list of UserDetails and pass it to inMemoryManager directly
+        //     List<UserDetails> users = List.of(mai,malak,yasso);
+        //     return new InMemoryUserDetailsManager(users);
+        //     return new InMemoryUserDetailsManager(malak,mai,yasso);
     }
+    */
+
+    @Bean
+    UserDetailsService userDetailsService(DataSource dataSource){
+        JdbcUserDetailsManager jdbcUserDetailsManager= new JdbcUserDetailsManager(dataSource);
+        UserDetails mai = User.withUsername("mai").password("{noop}mai").roles("mai").build();
+        UserDetails malak = User.withUsername("malak").password("{noop}malak").roles("malak").build();
+        UserDetails yasso = User.withUsername("yasso").password("{noop}yasso").roles("yasso").build();
+        if(!jdbcUserDetailsManager.userExists(mai.getUsername())){
+            jdbcUserDetailsManager.createUser(mai);
+        }
+        if(!jdbcUserDetailsManager.userExists(malak.getUsername())){
+//            jdbcUserDetailsManager.deleteUser(malak.getUsername());
+            jdbcUserDetailsManager.createUser(malak);
+        }
+        if(!jdbcUserDetailsManager.userExists(yasso.getUsername())){
+            jdbcUserDetailsManager.createUser(yasso);
+        }
+        return jdbcUserDetailsManager;
+    }
+
 }
