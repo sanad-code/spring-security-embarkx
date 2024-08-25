@@ -185,3 +185,10 @@
 
   CREATE UNIQUE INDEX ix_auth_username ON authorities (username, authority);
 ```
+- Why custom user mode?
+- Custom User model is created to extend user information.
+- Custome Authentication and Authorization Logic
+- Integration with 3rd party systems
+- Enhanced security, such as MFA.
+
+![Custom User](src/main/resources/sc/5.png)
