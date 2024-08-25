@@ -142,3 +142,27 @@
 - In application.properties we can add only one user and password.
 - InMemoryUserDetailsManager is the implementation of UserDetailsService and allow us to add multiple users.
 
+### Section 6 User Management
+
+![Core Classes](src/main/resources/sc/3.png)
+
+- UserDetails is an interface that represents the user details.
+- UserDetails is later encapsulated into Authentication object.
+- It provides the necessary information to authenticate the user like username, password, authorities, account status, etc.
+- User is a simple implementation of UserDetails.
+- User is often used to create a UserDetails object. Check code in SecurityConfig. User.withUsername("user").password("password").roles("USER").build();
+- UserDetailsService is an interface that provides the user details.
+- CredentialsContainer is an interface that provides the method eraseCredentials() to erase the user credentials after authentication.
+
+![UserDetails](src/main/resources/sc/4.png)
+
+- UserDetailsService is an interface that responsible for retrieving the user-specific data.
+- It has only one method loadUserByUsername(String username).
+- UserDetailsManager is an interface that extends UserDetailsService.
+- It provides additional methods to manage the user details like createUser, updateUser, deleteUser, change password, etc.
+- JdbcUserDetailsManager is an implementation of UserDetailsManager using JDBC-based datasource.
+- JdbcUserDetailsManager has predefined SQL queries to manage the user details.
+- InMemoryUserDetailsManager is an implementation of UserDetailsManager that stores the user details in memory.
+- InMemoryUserDetailsManager is useful for testing and development, it implements all methods in UserDetailsManager and UserDetailsService.
+- 
+
